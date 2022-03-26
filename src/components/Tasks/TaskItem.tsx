@@ -7,12 +7,12 @@ interface ITaskItemProps {}
 
 const TaskItem: FC<ITaskItemProps> = () => {
   return (
-    <div className="w-full flex justify-around items-center px-10 py-10 bg-main border border-stroke">
+    <div className="w-full flex flex-wrap md:flex-nowrap justify-around items-center px-4 lg:px-10 py-6 md:py-10 gap-x-3 gap-y-3 md:gap-y-0 bg-main border border-stroke">
       <input
         type="checkbox"
         className="w-6 h-6 appearance-none bg-main border border-black rounded-md cursor-pointer checked:border-transparent checked:bg-highlight-soft focus:outline-none focus:ring-0 text-highlight-soft"
       />
-      <p className="basis-1/2">
+      <p className="basis-4/5 md:basis-1/2">
         Juntarse en el barcon el grupo de la universidad
       </p>
       <input
