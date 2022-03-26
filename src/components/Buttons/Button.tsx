@@ -10,6 +10,7 @@ const Button: FC<IButtonProps> = ({
   label,
   isLoading,
   disabled,
+  className,
   ...extended
 }) => {
   const isDisabled = isLoading || disabled;
@@ -31,6 +32,7 @@ const Button: FC<IButtonProps> = ({
         'ease-in-out',
         'duration-300',
         disabledStyles,
+        className,
       )}
       {...extended}>
       {isLoading ? 'Cargando...' : label}
