@@ -17,8 +17,8 @@ const Button: FC<IButtonProps> = ({
 
   const disabledStyles = {
     'cursor-default': isDisabled,
-    'bg-gray-light': isDisabled,
-    'text-gray': isDisabled,
+    'bg-gray-200': isDisabled,
+    'hover:bg-gray-200': !isDisabled,
   };
   return (
     <button
@@ -27,7 +27,6 @@ const Button: FC<IButtonProps> = ({
         'px-10',
         'text-center',
         'bg-gray-300',
-        'hover:bg-gray-200',
         'transition',
         'ease-in-out',
         'duration-300',
