@@ -1,10 +1,16 @@
 import { FC, useState } from 'react';
+import Button from '../Buttons/Button';
 import Modal from '../Modal/Modal';
+import ModalContentAddTaskItem from './ModalContentAddTaskItem';
 
 interface IAddTaskItemProps {}
 
 const AddTaskItem: FC<IAddTaskItemProps> = () => {
   const [showModalToAddTask, setShowModalToAddTask] = useState(false);
+
+  const handleHideModalToAddTask = () => {
+    setShowModalToAddTask(false);
+  };
   return (
     <>
       <div
@@ -15,7 +21,7 @@ const AddTaskItem: FC<IAddTaskItemProps> = () => {
       <Modal
         open={showModalToAddTask}
         onClose={() => setShowModalToAddTask(false)}>
-        <h1>Agregar nueva tarea</h1>
+        <ModalContentAddTaskItem onClose={handleHideModalToAddTask} />
       </Modal>
     </>
   );
