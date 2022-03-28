@@ -43,7 +43,6 @@ const TextareaWithCharacterCounter = forwardRef<
           'w-full',
           'flex',
           'flex-col',
-          // 'items-end',
           'justify-center',
           containerClassName,
         )}>
