@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { selectTask } from '../../globals/slices/taskReducer';
 import { useAppSelector } from '../../hooks/useStore';
+import TaskService from '../../services/tasks/taskService';
 import ListOfTaskEmpty from './ListOfTaskEmpty';
 import TaskItem from './TaskItem';
 
@@ -14,9 +15,11 @@ const ListOfTasks: FC<IListOfTasksProps> = () => {
         tasks.map((task) => (
           <TaskItem
             key={task.id}
+            id={task.id}
             description={task.description}
             expirationDate={new Date(task.expirationDate)}
             completed={task.completed}
+            status={TaskService.getStatusOfTask(task)}
           />
         ))
       ) : (
