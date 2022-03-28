@@ -1,7 +1,7 @@
 import { startOfToday } from 'date-fns';
 import * as yup from 'yup';
 
-export const addTask = yup.object().shape({
+export const addTaskSchema = yup.object().shape({
   expirationDate: yup
     .date()
     .min(startOfToday(), 'La fecha de vencimiento ingresada no es válida')

@@ -2,14 +2,18 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '../Buttons/Button';
-import { addTask } from '../../services/tasks/schemas/taskSchemas';
+import { addTaskSchema } from '../../services/tasks/schemas/taskSchemas';
 import InputWithLabel from '../Input/InputWithLabel';
 import TextareaWithCharacterCounter from '../Input/TextareaWithCharacterCounter';
 import { format } from 'date-fns';
+import classNames from 'classnames';
+import { useAppDispatch } from '../../hooks/useStore';
+import { addTask } from '../../globals/slices/taskReducer';
 
 interface IAddTaskFormData {
   expirationDate: Date;
   description: string;
+  completed: boolean;
 }
 
 interface IModalContentAddTaskItem {
@@ -17,6 +21,7 @@ interface IModalContentAddTaskItem {
 }
 
 const ModalContentAddTaskItem: FC<IModalContentAddTaskItem> = ({ onClose }) => {
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -24,12 +29,26 @@ const ModalContentAddTaskItem: FC<IModalContentAddTaskItem> = ({ onClose }) => {
     formState: { errors, isValid },
     watch,
   } = useForm<IAddTaskFormData>({
-    resolver: yupResolver(addTask),
+    resolver: yupResolver(addTaskSchema),
     mode: 'onChange',
   });
 
   const handleAddTask = async (data: IAddTaskFormData) => {
-    console.log('Task', data);
+    dispatch(
+      addTask({
+        id: Date.now(),
+        createdAt: new Date().toISOString(),
+        description: data.description,
+        expirationDate: data.expirationDate.toISOString(),
+        completed: false,
+      }),
+    );
+    reset();
+    onClose();
+  };
+
+  const buttonToAddStyles = {
+    'pointer-events-none': !isValid,
   };
 
   return (
@@ -69,7 +88,7 @@ const ModalContentAddTaskItem: FC<IModalContentAddTaskItem> = ({ onClose }) => {
         />
         <Button
           label="Agregar"
-          className="basis-1/2"
+          className={classNames('basis-1/2', buttonToAddStyles)}
           disabled={!isValid}
           onClick={handleSubmit(handleAddTask)}
         />
