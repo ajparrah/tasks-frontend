@@ -8,6 +8,7 @@ const Actions: FC = () => {
       <Button
         label="Liberar Seleccionadas"
         onClick={() => console.log('Liberar seleccionadas')}
+        disabled={true}
         className="order-2 md:order-none"
       />
       <div

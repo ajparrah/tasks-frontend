@@ -29,6 +29,15 @@ export const addTask = createAsyncThunk(
   },
 );
 
+export const getAllTask = createAsyncThunk(
+  'tasks/fetchGetAllTask',
+  async (): Promise<Task[]> => {
+    const insTaskService = new TaskService();
+    const allTasks = await insTaskService.getAll();
+    return allTasks;
+  },
+);
+
 export const taskSlice = createSlice({
   name: 'tasks',
   initialState,
@@ -41,6 +50,13 @@ export const taskSlice = createSlice({
       .addCase(addTask.fulfilled, (state, action) => {
         state.status = 'idle';
         state.tasks.push(action.payload);
+      })
+      .addCase(getAllTask.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getAllTask.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.tasks = action.payload;
       });
   },
 });

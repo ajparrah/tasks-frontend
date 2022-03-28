@@ -7,6 +7,19 @@ export default class TaskService {
     this.route = `${TASK_API_URL}/tasks`;
   }
 
+  public async getAll(): Promise<Task[]> {
+    try {
+      const url = this.route;
+      const response = await fetch(url, {
+        method: 'GET',
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw new Error('Ha ocurrido un error al tratar de obtener las tareas');
+    }
+  }
+
   public async add(description: string, expirationDate: string): Promise<Task> {
     try {
       const url = this.route;
