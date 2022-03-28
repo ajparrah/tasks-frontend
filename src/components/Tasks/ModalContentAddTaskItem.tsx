@@ -34,13 +34,11 @@ const ModalContentAddTaskItem: FC<IModalContentAddTaskItem> = ({ onClose }) => {
   });
 
   const handleAddTask = async (data: IAddTaskFormData) => {
+    const { description, expirationDate } = data;
     dispatch(
       addTask({
-        id: Date.now(),
-        createdAt: new Date().toISOString(),
-        description: data.description,
-        expirationDate: data.expirationDate.toISOString(),
-        completed: false,
+        description,
+        expirationDate: expirationDate.toISOString(),
       }),
     );
     reset();
